@@ -19,66 +19,107 @@ interface HocusCastProps {
 
 export default function HocusCast({ personas }: HocusCastProps) {
   const [open, setOpen] = useState<string | null>(null);
+  const [cast, setCast] = useState<"wizard" | "valley">("wizard");
 
   return (
-    <div className="hocus-cast-grid">
-      {personas.map((persona) => {
-        const isOpen = open === persona.name;
-        const panelId = `hocus-cast-${persona.name.toLowerCase().replace(/\s+/g, "-")}`;
-        return (
-          <div
-            key={persona.name}
-            className={`hocus-cast-card${isOpen ? " is-open" : ""}`}
+    <div className="hocus-cast-wrapper">
+      <div className="hocus-cast-toggle-bar">
+        <span className="hocus-cast-toggle-label">Active cast naming:</span>
+        <div
+          className="hocus-cast-toggle-group"
+          role="group"
+          aria-label="Cast convention"
+        >
+          <button
+            type="button"
+            className={`hocus-cast-toggle-btn${cast === "wizard" ? " is-active" : ""}`}
+            onClick={() => {
+              setCast("wizard");
+              trackEvent("cast_toggle", {
+                category: "tool_engagement",
+                label: "wizard",
+              });
+            }}
           >
-            <button
-              type="button"
-              className="hocus-cast-card__head"
-              onClick={() => {
-                const next = isOpen ? null : persona.name;
-                setOpen(next);
-                if (next) {
-                  trackEvent("persona_card_expand", {
-                    category: "tool_engagement",
-                    label: persona.name,
-                  });
-                }
-              }}
-              aria-expanded={isOpen}
-              aria-controls={panelId}
-            >
-              <span className="hocus-cast-card__glyph" aria-hidden="true">
-                {persona.glyph}
-              </span>
-              <div className="hocus-cast-card__identity">
-                <div className="hocus-cast-card__name">{persona.name}</div>
-                <div className="hocus-cast-card__role">{persona.role}</div>
-              </div>
-              <span className="hocus-cast-card__chev" aria-hidden="true">
-                {isOpen ? "−" : "+"}
-              </span>
-            </button>
+            Wizards (Merlin, Zoroaster…)
+          </button>
+          <button
+            type="button"
+            className={`hocus-cast-toggle-btn${cast === "valley" ? " is-active" : ""}`}
+            onClick={() => {
+              setCast("valley");
+              trackEvent("cast_toggle", {
+                category: "tool_engagement",
+                label: "valley",
+              });
+            }}
+          >
+            Silicon Valley (Richard, Gilfoyle…)
+          </button>
+        </div>
+      </div>
+
+      <div className="hocus-cast-grid">
+        {personas.map((persona) => {
+          const displayName =
+            cast === "valley" ? persona.aliases.valley : persona.name;
+          const isOpen = open === persona.name;
+          const panelId = `hocus-cast-${persona.name.toLowerCase().replace(/\s+/g, "-")}`;
+          return (
             <div
-              id={panelId}
-              className="hocus-cast-card__panel"
-              hidden={!isOpen}
+              key={persona.name}
+              className={`hocus-cast-card${isOpen ? " is-open" : ""}`}
             >
-              <p className="hocus-cast-card__voice">{persona.voice}</p>
-              <p className="hocus-cast-card__summary">{persona.summary}</p>
-              {persona.triggers.length > 0 && (
-                <ul className="hocus-cast-card__triggers">
-                  {persona.triggers.map((trigger) => (
-                    <li key={trigger}>{trigger}</li>
-                  ))}
-                </ul>
-              )}
-              <p className="hocus-cast-card__aliases">
-                <span>valley: {persona.aliases.valley}</span>
-                <span>occult: {persona.aliases.occult}</span>
-              </p>
+              <button
+                type="button"
+                className="hocus-cast-card__head"
+                onClick={() => {
+                  const next = isOpen ? null : persona.name;
+                  setOpen(next);
+                  if (next) {
+                    trackEvent("persona_card_expand", {
+                      category: "tool_engagement",
+                      label: persona.name,
+                    });
+                  }
+                }}
+                aria-expanded={isOpen}
+                aria-controls={panelId}
+              >
+                <span className="hocus-cast-card__glyph" aria-hidden="true">
+                  {persona.glyph}
+                </span>
+                <div className="hocus-cast-card__identity">
+                  <div className="hocus-cast-card__name">{displayName}</div>
+                  <div className="hocus-cast-card__role">{persona.role}</div>
+                </div>
+                <span className="hocus-cast-card__chev" aria-hidden="true">
+                  {isOpen ? "−" : "+"}
+                </span>
+              </button>
+              <div
+                id={panelId}
+                className="hocus-cast-card__panel"
+                hidden={!isOpen}
+              >
+                <p className="hocus-cast-card__voice">{persona.voice}</p>
+                <p className="hocus-cast-card__summary">{persona.summary}</p>
+                {persona.triggers.length > 0 && (
+                  <ul className="hocus-cast-card__triggers">
+                    {persona.triggers.map((trigger) => (
+                      <li key={trigger}>{trigger}</li>
+                    ))}
+                  </ul>
+                )}
+                <p className="hocus-cast-card__aliases">
+                  <span>valley: {persona.aliases.valley}</span>
+                  <span>wizard: {persona.aliases.occult}</span>
+                </p>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }

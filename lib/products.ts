@@ -28,8 +28,16 @@ export const BUILDING: Product[] = [
     wordmarkClass: "hocus-wordmark",
     tagline: "thirteen agents · one repo · zero stand ups",
     description:
-      "A multi-agent harness generator. Write one SOUL.md persona and compile it into native formats for Claude Code, OpenCode, Cursor, and Antigravity — instead of maintaining the same instructions four times.",
-    tags: ["Claude Code", "OpenCode", "Cursor", "Antigravity"],
+      "A multi-agent harness generator and interactive command deck. Write one SOUL.md persona once and compile it into native formats for Claude Code, OpenCode, Codex, Cursor, Antigravity, Command Code, and GitHub Copilot.",
+    tags: [
+      "Claude Code",
+      "Cursor",
+      "Antigravity",
+      "Command Code",
+      "OpenCode",
+      "Copilot",
+      "TUI",
+    ],
     status: "live",
     statusLabel: "Live",
     href: "/products/hocus",

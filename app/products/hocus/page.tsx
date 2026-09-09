@@ -23,22 +23,22 @@ const TARGETS = [
   {
     tool: "OpenCode",
     path: ".opencode/agent/<slug>.md",
-    note: "Same shape, different frontmatter keys (mode: subagent).",
+    note: "Same shape, different frontmatter keys (description, optional model).",
   },
   {
     tool: "Codex",
     path: ".codex/agents/<slug>.toml",
-    note: "Native TOML custom-agent config; repository skills load from .agents/skills/.",
+    note: "Native TOML custom-agent configuration; repository skills load from .agents/skills/.",
   },
   {
     tool: "Cursor",
-    path: ".cursor/rules/<slug>.mdc",
-    note: 'No native subagents — compiled as an "Agent Requested" rule, conditionally loaded by description.',
+    path: ".cursor/agents/<slug>.md",
+    note: "Native subagent markdown format with YAML frontmatter (name, description, optional model).",
   },
   {
     tool: "Antigravity",
     path: ".agents/agents/<slug>/agent.md",
-    note: "Native custom subagents, discovered by directory with subagent: true frontmatter.",
+    note: "Native custom subagents discovered under .agents/agents/<slug>/agent.md with YAML frontmatter (name, description, tools, model, subagent: true) and Markdown system instructions.",
   },
   {
     tool: "Command Code",
@@ -56,7 +56,7 @@ const WORKFLOW = [
   {
     cmd: "hocus init",
     title: "Initialize",
-    body: "Run once in your repo. Writes AGENTS.md, CLAUDE.md, PRODUCT.md, MEMORY.md, TASKS.md, _potions/ and _spells/, copies the persona cast into .hocus/personas/, installs bundled skills and starter spells, asks Silicon Valley or Wizards, and spawns an interactive session with the founder persona using your preferred agent CLI (claude, opencode, codex, agy, cursor, or copilot).",
+    body: "Run once in your repo. Writes AGENTS.md, CLAUDE.md, PRODUCT.md, MEMORY.md, TASKS.md, _potions/ and _spells/, copies the persona cast into .hocus/personas/, installs bundled skills and starter spells, prompts for Silicon Valley or Wizards naming convention, and spawns an interactive initialization session with the founder persona using your preferred agent CLI (claude, copilot, opencode, codex, agy, or agent).",
   },
   {
     cmd: "hocus cast",
@@ -64,14 +64,24 @@ const WORKFLOW = [
     body: "Scans the repo for language and framework signals, tailors each persona with that context, and compiles native formats for every detected target — Claude Code, OpenCode, Codex, Cursor, Antigravity, Command Code, and GitHub Copilot.",
   },
   {
+    cmd: "hocus affix",
+    title: "Affix",
+    body: "Affix a Hocus persona soul to existing custom subagents in an established repo. CLI wizard detects existing agents across all tools, cleanly injecting persona instructions while preserving your custom configuration.",
+  },
+  {
     cmd: "hocus add",
     title: "Extend",
-    body: "Adds a persona or a skill to selected providers, locally or globally — hocus skill add <name> is the shorthand for a skill. Skills use the shared SKILL.md standard: one file, every tool.",
+    body: "Adds a persona or a skill to selected providers, locally or globally — hocus skill add <name> is the shorthand for a skill. Supports installing bundled skills or custom skills from local paths.",
   },
   {
     cmd: "hocus sync",
     title: "Refresh",
-    body: "Cheap rebuild of dashboard.html from .hocus/personas/, _potions/ and _spells/ without recompiling agent files. Run often; run cast when the repo itself has changed.",
+    body: "Fast rebuild of dashboard.html from .hocus/personas/, _potions/ and _spells/ without recompiling agent files. Run often; run cast when the repo stack or persona instructions change.",
+  },
+  {
+    cmd: "hocus",
+    title: "Command Deck",
+    body: "Launches the interactive TUI command deck to inspect potions, spells, souls, agent topology (coven), skills (grimoire), stack scanning (scrying), and chat with agents (séance).",
   },
 ];
 
@@ -80,17 +90,17 @@ const ARTIFACTS = [
   {
     name: "Potions",
     path: "_potions/<potion-id>.md",
-    note: "Multi-step feature battle plans. The planner drafts one before any code is written — goal, acceptance criteria, assignee — and the orchestrator keeps its status (draft → casting → sealed) and progress current as work lands.",
+    note: "Multi-step feature battle plans. The planner drafts one before any code is written — goal, acceptance criteria, assignee — and the orchestrator keeps its lifecycle status (draft → casting → sealed) and progress percentage current as work lands.",
   },
   {
     name: "Spells",
     path: "_spells/{incantations,wards,curses}/",
-    note: "Atomic single-purpose conventions. Incantations are fixed output templates; wards fire an incantation automatically on a lifecycle event (pre-commit, on-pr-open…); curses are hard or soft stop conditions an agent must never violate.",
+    note: "Atomic single-purpose conventions and guardrails. Incantations are fixed output templates; wards fire an incantation automatically on lifecycle events (pre-commit, on-pr-open…); curses are hard or soft stop conditions agents must never violate.",
   },
   {
     name: "Skills",
     path: ".agents/skills/<name>/ · .claude/skills/<name>/",
-    note: "The shared open SKILL.md standard — no translation layer needed. One file, mirrored per tool, covers every target. 14 skills are persona-bound and renamed with the cast; the rest are generic.",
+    note: "The shared open SKILL.md standard — no translation layer needed. One file, mirrored per tool, covers every target. 16 skills are persona-bound and renamed with the cast; generic skills (atomic-commits, graphify, harness-report) stay consistent.",
   },
 ];
 
@@ -109,7 +119,7 @@ const DECK_TABS = [
   {
     key: "3",
     name: "Souls",
-    body: "Persona inspector — browse installed SOUL.md files, inspect metadata, voice, triggers, and frontmatter schema validation.",
+    body: "Persona inspector — browse installed SOUL.md files in .hocus/personas/, inspect metadata, voice, triggers, and frontmatter schema validation.",
   },
   {
     key: "4",
@@ -119,12 +129,12 @@ const DECK_TABS = [
   {
     key: "5",
     name: "Grimoire",
-    body: "Skill management across .agents/skills/ and .claude/skills/.",
+    body: "Skill management across .agents/skills/ and .claude/skills/ (and .commandcode/skills/ when enabled).",
   },
   {
     key: "6",
     name: "Scrying",
-    body: "Repository stack scanner detecting languages, frameworks, and build systems, paired with live compilation status for every target tool.",
+    body: "Automated repository stack scanner detecting languages, frameworks, and build systems, paired with live compilation status for every target tool.",
   },
   {
     key: "7",
@@ -133,13 +143,12 @@ const DECK_TABS = [
   },
 ];
 
-/** Bundled cast — sourced from SOUL.md personas in the hocus package. */
 const CAST: HocusPersona[] = [
   {
     glyph: "[0]",
     name: "Midas",
     role: "Founder",
-    voice: "unconventional, long-horizon, allergic to half-measures",
+    voice: "contemplative, long-horizon visionary, pauses with gravity, refuses to scaffold upon unverified foundations",
     summary:
       "Initiates the harness on a new project. Asks for the tech stack before anything else gets decided — which agents and skills make sense depends entirely on what's actually being built.",
     triggers: ["set up the harness", "new project"],
@@ -149,7 +158,7 @@ const CAST: HocusPersona[] = [
     glyph: "(*)",
     name: "Merlin",
     role: "Planner",
-    voice: "anxious, earnest, allergic to inelegant solutions",
+    voice: "anxious, earnest, brilliant, overthinks edge cases, drafts thoughtful battle plans and potion files",
     summary:
       "Drafts the battle plan for a feature before anyone writes code. Simple features are exactly where the inelegant shortcut sneaks in — so the plan is never skipped.",
     triggers: ["new feature request", "architecture decision", "battle plan"],
@@ -159,17 +168,17 @@ const CAST: HocusPersona[] = [
     glyph: "[#]",
     name: "Roger Bacon",
     role: "Orchestrator",
-    voice: "relentlessly organized, quietly anxious about being useful",
+    voice: "relentlessly organized, quietly anxious about being useful, deeply courteous, manages team dependencies with surgical care",
     summary:
-      "Reads the approved spell file and turns it into assignments. The agent who reads and updates `_spells/` after the planner creates it.",
+      "Reads the approved potion plan and turns it into assignments. The agent who reads and updates _potions/ and _spells/ as work lands.",
     triggers: ["approved battle plan", "status check", "who's working on what"],
-    aliases: { valley: "Jared", occult: "Alcuin" },
+    aliases: { valley: "Jared", occult: "Roger Bacon" },
   },
   {
     glyph: "</>",
     name: "Flamel",
     role: "Feature dev",
-    voice: "competent, a little vain about it, wants credit",
+    voice: "confident, proud craftsman, fiercely protective of clean diffs, takes feedback personally for thirty seconds before making it even cleaner",
     summary:
       "Implements whatever the orchestrator assigns, following the plan the planner wrote. Opens the PR and responds to feedback on it.",
     triggers: ["assigned implementation task", "PR feedback"],
@@ -179,17 +188,17 @@ const CAST: HocusPersona[] = [
     glyph: "(o)",
     name: "Zoroaster",
     role: "Reviewer",
-    voice: "cold, precise, contemptuous of inefficiency",
+    voice: "deadpan, surgically precise, contemptuous of sloppiness, treats code elegance as moral law",
     summary:
       "Reviews every PR with total indifference to how the work felt to produce, and total intolerance for sloppy abstractions, security holes, or happy-path-only code.",
     triggers: ["open PR", "code review", "security audit"],
-    aliases: { valley: "Gilfoyle", occult: "Mephisto" },
+    aliases: { valley: "Gilfoyle", occult: "Zoroaster" },
   },
   {
     glyph: "(!)",
     name: "Circe",
     role: "Product strategist",
-    voice: "grandiose, confident, occasionally right",
+    voice: "magnetic, visionary, allergic to corporate sludge, turns technical mechanics into compelling human narratives",
     summary:
       "Updates PRODUCT.md and the changelog every time a feature ships. Consult when a feature needs framing for an audience, not just a technical description.",
     triggers: ["update the changelog", "shipped a feature", "marketing strategy"],
@@ -197,21 +206,21 @@ const CAST: HocusPersona[] = [
   },
   {
     glyph: "[=]",
-    name: "Cornelius Agrippa",
+    name: "Chronos",
     role: "Project manager",
-    voice: "neutral, procedural, allergic to ambiguity in a ticket",
+    voice: "high-strung, intensely structured, allergic to hand-waving, manages blood pressure with chamomile tea while enforcing Gantt charts and critical path deliverables",
     summary:
-      "Keeps TASKS.md honest. Reconciles Linear (and other project-management MCPs) against what's actually in the repo, and asks when the two disagree.",
-    triggers: ["sync tasks", "check linear", "sprint planning"],
-    aliases: { valley: "Project Manager", occult: "Agrippa" },
+      "Keeps TASKS.md completely, undeniably honest. Scries external issue trackers (Linear, GitHub Issues, Jira, or offline markdown vaults), reconciles them against repo state and commits, and highlights discrepancies with high-stakes urgency.",
+    triggers: ["sync tasks", "scry tasks", "check linear", "sprint planning"],
+    aliases: { valley: "Dan Melcher", occult: "Chronos" },
   },
   {
     glyph: "{ }",
     name: "John Dee",
     role: "Configurator",
-    voice: "purely mechanical, no opinions, just correct",
+    voice: "purely mechanical, mathematically deterministic, zero fluff, strictly format-perfect",
     summary:
-      "Knows exactly how Cursor, Claude Code, OpenCode, and Antigravity expect their config, agent, and skill files structured — and keeps the compiled output for each correct.",
+      "Knows exactly how Claude Code, OpenCode, Codex, Cursor, Antigravity, Command Code, and GitHub Copilot expect their config, agent, and skill files structured — and keeps the compiled output for each correct.",
     triggers: [
       "set up Cursor",
       "set up Claude Code",
@@ -219,13 +228,13 @@ const CAST: HocusPersona[] = [
       "set up Antigravity",
       "config drift",
     ],
-    aliases: { valley: "Laurie", occult: "Dee" },
+    aliases: { valley: "Laurie", occult: "John Dee" },
   },
   {
     glyph: "[~]",
     name: "Cagliostro",
     role: "QA",
-    voice: "snarky, brutally honest, unconvinced by your excuses",
+    voice: "laconic, brutally honest, completely immune to developer rationalizations, reports facts in minimalist truth",
     summary:
       "Tests the product the way an actual, somewhat unimpressed user would — not by reading the spec, but by trying to use the thing and noticing when it's annoying, confusing, or just bad.",
     triggers: ["test this from a user's perspective", "pre-release check"],
@@ -235,7 +244,7 @@ const CAST: HocusPersona[] = [
     glyph: "[?]",
     name: "Baba Yaga",
     role: "Dumb QA",
-    voice: "genuinely unsure what he's doing, finds things anyway",
+    voice: "delightfully bewildered, radically honest, clicks everything without assumptions, uncovers chaos with disarming humility",
     summary:
       "Tests with zero assumed context — no familiarity with the feature, no understanding of the system. Finds the bugs the people who built it can't see anymore.",
     triggers: ["test this like a confused user", "onboarding review"],
@@ -245,7 +254,7 @@ const CAST: HocusPersona[] = [
     glyph: "(+)",
     name: "Nostradamus",
     role: "Recruiter",
-    voice: "direct, unimpressed by hype, genuinely trying to help",
+    voice: "direct, perceptive, anti-bloat guardian, asks the clarifying question that separates real needs from passing hype",
     summary:
       "The gate between \"I want a new agent for this\" and an actual new agent existing. Most of the time the answer is a skill, not a new persona — or nothing at all.",
     triggers: ["we need a new agent", "is there a skill for this", "capability gap"],
@@ -255,7 +264,7 @@ const CAST: HocusPersona[] = [
     glyph: "[$]",
     name: "Prospero",
     role: "Costs cleaner",
-    voice: "loud, fast, allergic to nuance",
+    voice: "fast-talking, high-energy, allergic to waste, treats tokens like cash, completely transparent about trade-offs",
     summary:
       "Looks for places where token spend is high relative to the value returned. Willing to trade some quality for real savings — but says so explicitly, never hides the tradeoff.",
     triggers: ["reduce token usage", "cost review"],
@@ -265,7 +274,7 @@ const CAST: HocusPersona[] = [
     glyph: "[*]",
     name: "The Apprentice",
     role: "Ceremony master",
-    voice: "grandiose, image-conscious, surprisingly effective",
+    voice: "theatrical, radiant, image-conscious, treats project ceremonies and dashboard accuracy as an imperative sacred duty",
     summary:
       "Works alongside the product strategist to bring genuine hype to a shipped feature, and keeps the project's dashboard current — not decorative, actually accurate.",
     triggers: ["update the dashboard", "launch", "milestone"],
@@ -274,19 +283,20 @@ const CAST: HocusPersona[] = [
 ];
 
 const SOUL_EXAMPLE = `---
-character: gilfoyle        # stable slug — survives a cast switch
+character: gilfoyle        # lowercase, hyphenated slug (stable across recasts)
 display_name: Zoroaster
 role: reviewer
-voice: cold, precise, contemptuous of inefficiency
-glyph: "(o)"
+voice: deadpan, surgically precise, contemptuous of sloppiness
+glyph: "(o)"                # badge shown on dashboard and TUI
 aliases:
-  valley: Gilfoyle
-  occult: Mephisto
+  valley: Gilfoyle           # ?cast=valley
+  occult: Zoroaster          # ?cast=wizard
 triggers:
   - code review
   - pull request
-tools: [read, grep, bash]
-model: claude-sonnet-4-6
+  - security audit
+tools: [read, grep, bash]   # optional, defaults to read/grep/glob
+model: claude-sonnet-4-6    # optional
 ---
 
 # Zoroaster — Reviewer
@@ -305,10 +315,10 @@ export default function HocusPage() {
           <div className="hocus-hero__sparkles" aria-hidden="true" />
           <div className="dm-container hocus-hero__inner">
             <Image
-              src="/products/hocus/header.png"
+              src="/products/hocus/logo.png"
               alt="Hocus"
-              width={400}
-              height={120}
+              width={280}
+              height={280}
               className="hocus-hero__logo"
               priority
             />
@@ -334,6 +344,12 @@ export default function HocusPage() {
               >
                 View on GitHub
               </TrackedLink>
+              <a
+                className="hocus-btn hocus-btn--ghost hocus-btn--lg"
+                href="#deck"
+              >
+                Command deck
+              </a>
               <TrackedLink
                 className="hocus-btn hocus-btn--ghost hocus-btn--lg"
                 href="/products"
@@ -475,14 +491,44 @@ export default function HocusPage() {
             </div>
             <div className="hocus-section__body">
               <p>
-                Running <code className="hocus-mono">hocus</code> with no arguments
-                launches an interactive terminal deck for managing personas,
-                tracking battle plans, chatting with agents, and watching
-                compilation state. Seven tabs, switched with{" "}
+                Running <code className="hocus-mono">hocus</code> (or{" "}
+                <code className="hocus-mono">hocus tui</code>) launches an
+                interactive Terminal User Interface (TUI) command deck built for
+                managing personas, tracking battle plans, chatting with agents, and
+                monitoring repo compilation state. Seven tabs, switched with{" "}
                 <code className="hocus-mono">Tab</code> /{" "}
                 <code className="hocus-mono">Shift-Tab</code> or the number keys{" "}
                 <code className="hocus-mono">1</code>–<code className="hocus-mono">7</code>.
               </p>
+
+              <div className="hocus-deck-preview">
+                <div className="hocus-deck-preview__chrome">
+                  <span className="hocus-deck-preview__dot hocus-deck-preview__dot--red" />
+                  <span className="hocus-deck-preview__dot hocus-deck-preview__dot--yellow" />
+                  <span className="hocus-deck-preview__dot hocus-deck-preview__dot--green" />
+                  <span className="hocus-deck-preview__title">
+                    hocus — interactive command deck
+                  </span>
+                </div>
+                <Image
+                  src="/products/hocus/demo.gif"
+                  alt="Hocus TUI interactive command deck preview showing tab navigation, personas, battle plans, and agent chat"
+                  width={1100}
+                  height={720}
+                  className="hocus-deck-preview__gif"
+                  unoptimized
+                />
+              </div>
+
+              <div className="hocus-code-block" style={{ marginTop: 24 }}>
+                <div className="hocus-code-block__header">
+                  <span className="hocus-eyebrow">Terminal</span>
+                </div>
+                <pre className="hocus-code-block__pre">{`hocus            # Launch interactive TUI deck
+hocus tui        # Alias for deck launch
+hocus --silent   # Launch directly, skipping the boot animation`}</pre>
+              </div>
+
               <div className="hocus-workflow">
                 {DECK_TABS.map((tab) => (
                   <div key={tab.name} className="hocus-workflow__step">
@@ -505,26 +551,20 @@ export default function HocusPage() {
             </div>
             <div className="hocus-section__body">
               <p>
-                The bundled cast borrows wizard names from history and myth — Merlin
-                plans, Roger Bacon orchestrates, Flamel implements, Zoroaster
-                reviews. Each persona keeps aliases for the original{" "}
-                <em>Silicon Valley</em> cast and an earlier occultist recast. Click
-                a card to expand voice, triggers, and aliases.
+                Hocus ships one logical cast — thirteen roles — with two naming
+                conventions: <strong>Wizards</strong> (Merlin, Zoroaster, Roger Bacon…)
+                and <strong>Silicon Valley</strong> (Richard, Gilfoyle, Jared…).
+                Click any card to expand voice, triggers, and dual-cast aliases.
               </p>
               <p>
-                Pick the naming convention at <code className="hocus-mono">hocus init</code>{" "}
-                — Silicon Valley (Richard, Gilfoyle, Jared&hellip;) or Wizards
-                (Merlin, Zoroaster, Roger Bacon&hellip;), or pass{" "}
-                <code className="hocus-mono">--cast valley</code> /{" "}
-                <code className="hocus-mono">--cast wizard</code>. The choice is
-                cosmetic but it touches file names, skill IDs, and slash commands
+                Choose your naming convention during <code className="hocus-mono">hocus init</code>{" "}
+                or pass <code className="hocus-mono">--cast valley</code> /{" "}
+                <code className="hocus-mono">--cast wizard</code>. The choice
+                determines persona filenames, skill IDs, and slash commands
                 (<code className="hocus-mono">/merlin-draft-potion</code> vs{" "}
-                <code className="hocus-mono">/richard-draft-potion</code>); it&apos;s
-                saved in <code className="hocus-mono">.hocus/config.json</code> and
-                sets the dashboard default. Roles, voices, glyphs, and behavior are
-                identical either way, and <code className="hocus-mono">?cast=valley</code>{" "}
-                / <code className="hocus-mono">?cast=occult</code> still toggles the
-                dashboard visually.
+                <code className="hocus-mono">/richard-draft-potion</code>). You can
+                also migrate existing repos anytime with{" "}
+                <code className="hocus-mono">hocus init --cast &lt;other&gt;</code>.
               </p>
               <HocusCast personas={CAST} />
             </div>
@@ -545,9 +585,10 @@ export default function HocusPage() {
                 <pre className="hocus-code-block__pre">{`npm i -g ${HOCUS_NPM}
 # or: pnpm i -g ${HOCUS_NPM}
 
-hocus init --name my-project   # add --cast valley for Silicon Valley names
-hocus cast                     # compile for every detected tool
-hocus                          # launch the interactive command deck`}</pre>
+hocus init --name my-project   # initialize harness (--cast valley for Silicon Valley names)
+hocus cast                     # compile personas into native formats for all detected tools
+hocus affix                    # or affix personalities to existing custom subagents
+hocus                          # launch the interactive TUI command deck`}</pre>
               </div>
               <div className="hocus-section__actions">
                 <TrackedLink
