@@ -60,6 +60,19 @@ export const BUILDING: Product[] = [
 
 export const FREE_TOOLS: Product[] = [
   {
+    slug: "gitmoire",
+    name: "gitmoire",
+    tagline: "14 megabytes · zero telemetry · native speed",
+    description:
+      "A tiny, native desktop Git client built on Rust and libgit2. Opens in milliseconds, virtualizes 100k commits effortlessly, and leaves 1 GB Electron memory-hogs behind. Free, MIT, and 100% local.",
+    tags: ["Rust", "Tauri v2", "libgit2", "macOS", "Windows", "Linux", "Free"],
+    status: "free",
+    statusLabel: "Free · MIT",
+    href: "/gitmoire",
+    github: "https://github.com/dark-magic-studios/gitmoire",
+    mark: "/products/gitmoire/mark.png",
+  },
+  {
     slug: "signum",
     name: "signum",
     tagline: "text · date · company · logo · signature",

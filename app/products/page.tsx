@@ -8,7 +8,7 @@ import { BUILDING, FREE_TOOLS, COMING_SOON } from "@/lib/products";
 export const metadata: Metadata = {
   title: "Products — Dark Magic Studios",
   description:
-    "Everything Dark Magic Studios is building: Hocus and Vitreus in active development, Signum free in the browser, Forgeboard and Pulsebook on the way.",
+    "Everything Dark Magic Studios is building: Hocus and Vitreus in active development, Gitmoire and Signum free for developers, Forgeboard and Pulsebook on the way.",
 };
 
 const GROUPS = [
@@ -23,7 +23,7 @@ const GROUPS = [
     id: "free",
     eyebrow: "— Free, no account",
     title: "Free tools",
-    lede: "Small utilities that run entirely in your browser. Nothing to install, nothing uploaded, no sign-up.",
+    lede: "Native utilities and browser tools. Zero tracking, zero account requirement, completely free.",
     items: FREE_TOOLS,
   },
   {
@@ -48,9 +48,9 @@ export default function ProductsPage() {
               Everything we&apos;re<br />building right now.
             </h1>
             <p className="dm-subpage-hero__lede">
-              Two products in active development, one free tool you can use in the
-              next thirty seconds, and two more on the bench. This page is the whole
-              list — if it isn&apos;t here, we aren&apos;t working on it.
+              Products in active development, free native and client-side developer
+              tools you can use immediately, and more on the bench. This page is
+              the whole list — if it isn&apos;t here, we aren&apos;t working on it.
             </p>
           </div>
         </section>
