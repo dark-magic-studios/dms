@@ -1,0 +1,8 @@
+---
+description: Always use RTK (Rust Token Killer) to execute shell commands to minimize token consumption
+globs: *
+alwaysApply: true
+---
+
+Always prefix shell commands with `rtk` (e.g. `rtk git status`, `rtk cargo test`, `rtk pnpm test`, `rtk find`, `rtk grep`).
+RTK filters and compresses command output before it reaches the LLM context, saving 60-90% tokens on common operations.

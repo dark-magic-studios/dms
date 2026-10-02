@@ -1,0 +1,15 @@
+{
+  "name": "dms-plugin",
+  "version": "0.1.0",
+  "description": "Multi-agent harness plugin for dms",
+  "agents": [
+    "./claude/agents/big-head.md",
+    "./claude/agents/dinesh.md",
+    "./claude/agents/erlich.md",
+    "./claude/agents/gavin.md",
+    "./claude/agents/gilfoyle.md",
+    "./claude/agents/jared.md",
+    "./claude/agents/peter-gregory.md",
+    "./claude/agents/richard.md"
+  ]
+}

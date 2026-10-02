@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "dms-harness": {
+      "source": {
+        "source": "directory",
+        "path": "."
+      }
+    }
+  },
+  "enabledPlugins": {
+    "dms-plugin@dms-harness": true
+  }
+}

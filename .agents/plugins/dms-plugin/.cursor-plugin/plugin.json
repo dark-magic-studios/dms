@@ -1,0 +1,20 @@
+{
+  "name": "dms-plugin",
+  "version": "0.1.0",
+  "description": "Multi-agent harness plugin for dms",
+  "agents": [
+    "./cursor/agents/big-head.md",
+    "./cursor/agents/dinesh.md",
+    "./cursor/agents/erlich.md",
+    "./cursor/agents/gavin.md",
+    "./cursor/agents/gilfoyle.md",
+    "./cursor/agents/jared.md",
+    "./cursor/agents/peter-gregory.md",
+    "./cursor/agents/richard.md"
+  ],
+  "rules": [
+    "./cursor/rules/graphify.mdc",
+    "./cursor/rules/rtk.mdc"
+  ],
+  "mcpServers": "./mcp.json"
+}

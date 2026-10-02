@@ -1,0 +1,16 @@
+{
+  "name": "dms-harness",
+  "owner": {
+    "name": "dms"
+  },
+  "metadata": {
+    "description": "Local hocus harness for dms"
+  },
+  "plugins": [
+    {
+      "name": "dms-plugin",
+      "source": "./.agents/plugins/dms-plugin",
+      "description": "Multi-agent harness plugin for dms"
+    }
+  ]
+}

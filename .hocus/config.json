@@ -1,0 +1,14 @@
+{
+  "cast": "valley",
+  "providers": [
+    "claude-code",
+    "codex",
+    "opencode",
+    "cursor",
+    "antigravity"
+  ],
+  "format": "plugin",
+  "symlinks": true,
+  "runner": "claude",
+  "pluginName": "dms-plugin"
+}
