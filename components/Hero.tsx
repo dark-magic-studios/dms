@@ -34,21 +34,33 @@ export default function Hero() {
         <div className="dm-hero__cta-row">
           <TrackedLink
             className="dm-btn dm-btn--primary"
+            href="/products/hocus"
+            eventName="nav_click"
+            eventCategory="navigation"
+            eventLabel="hero_hocus"
+          >
+            hocus
+          </TrackedLink>
+          <TrackedLink
+            className="dm-btn dm-btn--ghost"
+            href="https://gitmoire.dev"
+            external
+            target="_blank"
+            rel="noopener noreferrer"
+            eventName="nav_click"
+            eventCategory="navigation"
+            eventLabel="hero_gitmoire"
+          >
+            gitmoire
+          </TrackedLink>
+          <TrackedLink
+            className="dm-btn dm-btn--ghost"
             href="/products"
             eventName="nav_click"
             eventCategory="navigation"
             eventLabel="hero_products"
           >
-            What we&apos;re building
-          </TrackedLink>
-          <TrackedLink
-            className="dm-btn dm-btn--ghost"
-            href="/services"
-            eventName="nav_click"
-            eventCategory="navigation"
-            eventLabel="hero_services"
-          >
-            What we do →
+            All products
           </TrackedLink>
         </div>
       </div>

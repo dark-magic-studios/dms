@@ -96,9 +96,9 @@
     "semantic_hash": ""
   },
   ".opencode/opencode.json": {
-    "mtime": 1790908436.0512314,
-    "seen": 1790911787.8054392,
-    "ast_hash": "0f77c4034581991c45166c5c639aee25",
+    "mtime": 1791766519.664556,
+    "seen": 1791767215.4093108,
+    "ast_hash": "0a9e0e64b9fed6e6171311ea9f2ad443",
     "semantic_hash": ""
   },
   ".opencode/plugins/graphify.js": {
@@ -120,9 +120,9 @@
     "semantic_hash": ""
   },
   "app/gitmoire/page.tsx": {
-    "mtime": 1790912355.6178648,
-    "seen": 1790912430.758749,
-    "ast_hash": "1343770bf076dbde8c2ac3dae23ddb29",
+    "mtime": 1791766731.754925,
+    "seen": 1791767215.4093268,
+    "ast_hash": "183951491320470ae202a271fb2e0af6",
     "semantic_hash": ""
   },
   "app/layout.tsx": {
@@ -132,15 +132,15 @@
     "semantic_hash": ""
   },
   "app/page.tsx": {
-    "mtime": 1790908334.2135851,
-    "seen": 1790911787.8054507,
-    "ast_hash": "fafe0a833e975f4c31b899db699f33be",
+    "mtime": 1791767138.556625,
+    "seen": 1791767215.409335,
+    "ast_hash": "998c7d8a1def3ea90ad95ce50b5249dd",
     "semantic_hash": ""
   },
   "app/products/gitmoire/page.tsx": {
-    "mtime": 1790911440.9406784,
-    "seen": 1790911787.805452,
-    "ast_hash": "fb168de02ffa0d664d5c7dd8548e9d60",
+    "mtime": 1791766752.1015875,
+    "seen": 1791767215.409339,
+    "ast_hash": "6cc5974373894dcb777194daab7240b7",
     "semantic_hash": ""
   },
   "app/products/hocus/page.tsx": {
@@ -192,21 +192,9 @@
     "semantic_hash": ""
   },
   "components/Footer.tsx": {
-    "mtime": 1790908334.2161932,
-    "seen": 1790911787.805468,
-    "ast_hash": "0f77e165e1e70c98713d63a520f5e90c",
-    "semantic_hash": ""
-  },
-  "components/GitmoireDeck.tsx": {
-    "mtime": 1790911621.6444104,
-    "seen": 1790911787.80547,
-    "ast_hash": "0c9e919701a2f39653f91e4390953cdb",
-    "semantic_hash": ""
-  },
-  "components/GitmoireDownloads.tsx": {
-    "mtime": 1790911686.941579,
-    "seen": 1790911787.8054714,
-    "ast_hash": "f787a128ba3d1249c0796c2462ccf7d1",
+    "mtime": 1791766752.1045873,
+    "seen": 1791767215.4093719,
+    "ast_hash": "034bd679d540b232e63c42512b561c2f",
     "semantic_hash": ""
   },
   "components/GoogleAnalytics.tsx": {
@@ -216,9 +204,9 @@
     "semantic_hash": ""
   },
   "components/Hero.tsx": {
-    "mtime": 1790908334.2161932,
-    "seen": 1790911787.805474,
-    "ast_hash": "25b9f6d4c0ccec3ace2e78bd86d9419d",
+    "mtime": 1791767129.3807528,
+    "seen": 1791767215.4093792,
+    "ast_hash": "adf745b868f366486d2b2c87f76e95ab",
     "semantic_hash": ""
   },
   "components/HocusCast.tsx": {
@@ -228,9 +216,9 @@
     "semantic_hash": ""
   },
   "components/HomeTeasers.tsx": {
-    "mtime": 1790908334.2161932,
-    "seen": 1790911787.805477,
-    "ast_hash": "03b29048c42d10b802f1fa3e4ce18372",
+    "mtime": 1791767186.8729584,
+    "seen": 1791767215.4093933,
+    "ast_hash": "26b389437e2649dcfc4ded68b63db687",
     "semantic_hash": ""
   },
   "components/NavBar.tsx": {
@@ -240,9 +228,9 @@
     "semantic_hash": ""
   },
   "components/ProductCard.tsx": {
-    "mtime": 1790908334.2161932,
-    "seen": 1790911787.8054798,
-    "ast_hash": "bce3ac080fc8a810a212208765c4fae3",
+    "mtime": 1791766714.9533324,
+    "seen": 1791767215.4094017,
+    "ast_hash": "e5f35660966d6b5558023e8ec39d7a73",
     "semantic_hash": ""
   },
   "components/Services.tsx": {
@@ -270,9 +258,9 @@
     "semantic_hash": ""
   },
   "lib/products.ts": {
-    "mtime": 1790911425.8528652,
-    "seen": 1790911787.805489,
-    "ast_hash": "dc278f4363046d796b1467311cd66ec0",
+    "mtime": 1791767126.1987972,
+    "seen": 1791767215.409422,
+    "ast_hash": "4e6a73b17f4b6f0bb662fe524ded3839",
     "semantic_hash": ""
   },
   "next.config.ts": {
@@ -1217,78 +1205,6 @@
     "ast_hash": "8e061864f388b47f33a1c3780831193e",
     "semantic_hash": ""
   },
-  "public/products/gitmoire/01-welcome.png": {
-    "mtime": 1790911397.4882154,
-    "seen": 1790911787.8058114,
-    "ast_hash": "769f8d27e61138cb402856cef62270d1",
-    "semantic_hash": ""
-  },
-  "public/products/gitmoire/01-welcome.webp": {
-    "mtime": 1790911397.4882154,
-    "seen": 1790911787.8058133,
-    "ast_hash": "50d31bd3f3a0c08312661a82670400e6",
-    "semantic_hash": ""
-  },
-  "public/products/gitmoire/02-graph.png": {
-    "mtime": 1790911397.4882154,
-    "seen": 1790911787.8058152,
-    "ast_hash": "10554c466bd4d579adf36151c53f477f",
-    "semantic_hash": ""
-  },
-  "public/products/gitmoire/02-graph.webp": {
-    "mtime": 1790911397.4882154,
-    "seen": 1790911787.8058167,
-    "ast_hash": "80c2fa72d885613fbd7ad44e600a0c4d",
-    "semantic_hash": ""
-  },
-  "public/products/gitmoire/03-diff.png": {
-    "mtime": 1790911397.4882154,
-    "seen": 1790911787.8058178,
-    "ast_hash": "2130455adf6185a468fd3198526c802e",
-    "semantic_hash": ""
-  },
-  "public/products/gitmoire/03-diff.webp": {
-    "mtime": 1790911397.4882154,
-    "seen": 1790911787.805819,
-    "ast_hash": "54e61cc301d6e590ff53f3152ded2b4c",
-    "semantic_hash": ""
-  },
-  "public/products/gitmoire/04-conflicts.png": {
-    "mtime": 1790911397.4882154,
-    "seen": 1790911787.805821,
-    "ast_hash": "895a720528ebd0bd74edbbfb9f900c47",
-    "semantic_hash": ""
-  },
-  "public/products/gitmoire/04-conflicts.webp": {
-    "mtime": 1790911397.4882154,
-    "seen": 1790911787.8058221,
-    "ast_hash": "80c472b2408423e592f6fbe18ec8cead",
-    "semantic_hash": ""
-  },
-  "public/products/gitmoire/05-inspector.png": {
-    "mtime": 1790911397.4882154,
-    "seen": 1790911787.8058233,
-    "ast_hash": "c9738a846692e0645a60889e51977557",
-    "semantic_hash": ""
-  },
-  "public/products/gitmoire/05-inspector.webp": {
-    "mtime": 1790911397.4892154,
-    "seen": 1790911787.8058252,
-    "ast_hash": "3702047c70d42198424afe9661da9459",
-    "semantic_hash": ""
-  },
-  "public/products/gitmoire/06-palette.png": {
-    "mtime": 1790911397.4892154,
-    "seen": 1790911787.8058274,
-    "ast_hash": "e5b083af8dde720f16ddfdd94159ace4",
-    "semantic_hash": ""
-  },
-  "public/products/gitmoire/06-palette.webp": {
-    "mtime": 1790911397.4892154,
-    "seen": 1790911787.8058288,
-    "ast_hash": "0b204fd5838671092bd0d80c30f83558",
-    "semantic_hash": ""
-  },
   "public/products/gitmoire/logo.svg": {
     "mtime": 1790911397.4922154,
     "seen": 1790911787.8058307,
@@ -1373,10 +1289,10 @@
     "ast_hash": "b7893fef52b0910ae6894cee3a2782c8",
     "semantic_hash": ""
   },
-  "components/GitmoireDifferentiators.tsx": {
-    "mtime": 1790912159.991441,
-    "seen": 1790912430.7588453,
-    "ast_hash": "87dc31bfd871875c89849e0c27c2ce31",
+  "components/HomeLeading.tsx": {
+    "mtime": 1791767125.8298023,
+    "seen": 1791767215.4093888,
+    "ast_hash": "be8c6826dc11851d12dc2b333d9ec1dc",
     "semantic_hash": ""
   }
 }

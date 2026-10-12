@@ -68,7 +68,7 @@ export const FREE_TOOLS: Product[] = [
     tags: ["Rust", "Tauri v2", "libgit2", "macOS", "Windows", "Linux", "Free"],
     status: "free",
     statusLabel: "Free · MIT",
-    href: "/gitmoire",
+    href: "https://gitmoire.dev",
     github: "https://github.com/dark-magic-studios/gitmoire",
     mark: "/products/gitmoire/mark.png",
   },
@@ -109,6 +109,12 @@ export const COMING_SOON: Product[] = [
     statusLabel: "Coming soon",
     Icon: HeartPulse,
   },
+];
+
+/** Flagship products surfaced first on the home page. */
+export const HOME_LEADING: Product[] = [
+  BUILDING.find((p) => p.slug === "hocus")!,
+  FREE_TOOLS.find((p) => p.slug === "gitmoire")!,
 ];
 
 export const ALL_PRODUCTS: Product[] = [...BUILDING, ...FREE_TOOLS, ...COMING_SOON];

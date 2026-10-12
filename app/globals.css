@@ -1882,6 +1882,48 @@ em {
 }
 
 /* =========================================================
+   Home leading — flagship products
+   ========================================================= */
+.dm-home-leading {
+  padding: 0 32px 96px;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.dm-home-leading__head {
+  max-width: 640px;
+  margin-bottom: 40px;
+}
+.dm-home-leading__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3.5vw, 40px);
+  color: var(--fg-1);
+  margin: 12px 0 0;
+  line-height: 1.15;
+}
+.dm-home-leading__lede {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--fg-3);
+  margin: 16px 0 0;
+}
+.dm-home-leading__more {
+  display: inline-block;
+  margin-top: 32px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-4);
+  text-decoration: none;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+.dm-home-leading__more:hover {
+  color: var(--verdant-300);
+}
+
+/* =========================================================
    Home teasers — the two-page hub
    ========================================================= */
 .dm-teasers {
@@ -1980,6 +2022,11 @@ em {
   border: 1px solid var(--border-1);
   border-radius: var(--radius-1);
   padding: 4px 10px;
+}
+.dm-teaser__chip--lead {
+  color: var(--fg-1);
+  border-color: rgba(0, 255, 102, 0.35);
+  background: rgba(0, 255, 102, 0.06);
 }
 .dm-teaser__link {
   font-family: var(--font-mono);

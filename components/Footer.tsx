@@ -28,6 +28,7 @@ export default function Footer() {
             <TrackedLink className="dm-footer__link" href="/products" eventName="nav_click" eventCategory="navigation" eventLabel="footer_all_products">All products</TrackedLink>
             <TrackedLink className="dm-footer__link" href="/products/hocus" eventName="nav_click" eventCategory="navigation" eventLabel="footer_hocus">Hocus</TrackedLink>
             <TrackedLink className="dm-footer__link" href="/products/vitreus" eventName="nav_click" eventCategory="navigation" eventLabel="footer_vitreus">Vitreus</TrackedLink>
+            <TrackedLink className="dm-footer__link" href="https://gitmoire.dev" external eventName="nav_click" eventCategory="navigation" eventLabel="footer_gitmoire">gitmoire (free)</TrackedLink>
             <TrackedLink className="dm-footer__link" href="/tools/signum" eventName="nav_click" eventCategory="navigation" eventLabel="footer_signum">Signum (free)</TrackedLink>
           </div>
           <div>

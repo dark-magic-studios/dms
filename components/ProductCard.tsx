@@ -5,6 +5,7 @@ import type { Product } from "@/lib/products";
 export default function ProductCard({ product }: { product: Product }) {
   const { Icon } = product;
   const isSoon = product.status === "soon";
+  const hrefIsExternal = product.href?.startsWith("http") ?? false;
 
   return (
     <article className={`dm-product-card${isSoon ? " dm-product-card--soon" : ""}`}>
@@ -47,6 +48,9 @@ export default function ProductCard({ product }: { product: Product }) {
             <TrackedLink
               className="hocus-btn hocus-btn--primary"
               href={product.href}
+              external={hrefIsExternal}
+              target={hrefIsExternal ? "_blank" : undefined}
+              rel={hrefIsExternal ? "noopener noreferrer" : undefined}
               eventName="nav_click"
               eventCategory="navigation"
               eventLabel={`product_open_${product.slug}`}
