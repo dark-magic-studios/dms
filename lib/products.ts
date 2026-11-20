@@ -69,7 +69,7 @@ export const FREE_TOOLS: Product[] = [
     status: "free",
     statusLabel: "Free · MIT",
     href: "https://gitmoire.dev",
-    github: "https://github.com/dark-magic-studios/gitmoire",
+    github: "https://github.com/dark-magic-studios/gitmoire-releases",
     mark: "/products/gitmoire/mark.png",
   },
   {

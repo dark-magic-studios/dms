@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 };
 
 const GITMOIRE_HOME = "https://gitmoire.dev";
-const GITHUB_REPO = "https://github.com/dark-magic-studios/gitmoire";
+const GITHUB_REPO = "https://github.com/dark-magic-studios/gitmoire-releases";
 
 const POINTS = [
   {
